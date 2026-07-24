@@ -8,7 +8,8 @@
 - cases.html — кейсы
 - insights.html — аналитика
 - privacy.html — политика обработки персональных данных
-- support.js, geo-map.js, image-slot.js — скрипты страниц
+- site.css — общие стили внутренних страниц
+- geo-map.js — карта географии практики (главная)
 - robots.txt, sitemap.xml — SEO
 
 ## Публикация
