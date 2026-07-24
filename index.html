@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>id consulting — юридическое сопровождение бизнеса, банкротство, защита активов</title>
+<meta name="description" content="Юридическая фирма для бизнеса: абонентское сопровождение, банкротство и субсидиарная ответственность, корпоративные споры, приобретение и защита активов. Работаем с 2013 года, 13 городов России и Казахстан.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="id consulting — юридическое сопровождение бизнеса">
+<meta property="og:description" content="Абонентское сопровождение, банкротство, корпоративные споры, защита активов. С 2013 года, 13 городов.">
+<meta property="og:locale" content="ru_RU">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LegalService",
+  "name": "id consulting",
+  "legalName": "ООО «АйДи Консалтинг»",
+  "description": "Юридическое сопровождение бизнеса: абонентское обслуживание, банкротство, корпоративные споры, приобретение и защита активов.",
+  "foundingDate": "2013",
+  "email": "hello@idconsulting.legal",
+  "telephone": "+7 495 000 00 00",
+  "address": {"@type": "PostalAddress", "addressLocality": "Москва", "addressCountry": "RU"},
+  "areaServed": ["Москва","Санкт-Петербург","Казань","Ростов-на-Дону","Краснодар","Сочи","Майкоп","Махачкала","Воронеж","Орёл","Владикавказ","Кемерово","Алматы"],
+  "knowsAbout": ["банкротство","субсидиарная ответственность","корпоративные споры","защита активов","абонентское юридическое обслуживание"]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/d3@7.9.0/dist/d3.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/topojson-client@3.1.0/dist/topojson-client.min.js" integrity="sha384-Ukv1p/xTma6P4/2bY5KzWBw+ydSpXmhCMtyciIQVDJ1RmOxtCYNMF1uXT9T63H67" crossorigin="anonymous"></script>
+<style>
+  :root{--ink:#14161c;--graphite:#5b606e;--mist:#9a9ea9;--paper:#f4f3ee;--card:#ffffff;--line:#e3e2db;--line2:#d3d2ca;--accent:#2f4ee6;--accent-tint:#e8ebfc;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);}
+  ::selection{background:var(--accent);color:#fff;}
+  a{color:var(--accent);text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  input::placeholder,textarea::placeholder{color:#9a9ea9;}
+  @keyframes heroWord{from{opacity:0;transform:translateY(26px);filter:blur(6px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}
+  @keyframes heroFade{from{opacity:0}to{opacity:1}}
+  @keyframes orbit{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+  @keyframes dotPulse{0%,100%{box-shadow:0 0 0 0 rgba(47,78,230,.25)}50%{box-shadow:0 0 0 14px rgba(47,78,230,0)}}
+
+@media (max-width:820px){
+  .wrap{padding-left:24px !important; padding-right:24px !important;}
+  .rail{display:none !important;}
+  .facts-grid{grid-template-columns:1fr !important;}
+  .svc-detail{grid-template-columns:1fr !important; gap:32px !important;}
+ 
+  .nav-links{gap:14px !important; font-size:13px !important; flex-wrap:wrap; justify-content:flex-end;}
+  .hero-grid{grid-template-columns:1fr !important; gap:36px !important;}
+  .hero-art{height:280px !important;}
+  .hero-sub{grid-template-columns:1fr !important; gap:24px !important;}
+  .hero-sub > div:last-child{justify-content:flex-start !important;}
+  .hero-stats{grid-template-columns:1fr !important; gap:22px !important;}
+  .g1{grid-template-columns:1fr !important;}
+  .svc-wide{grid-column:auto !important;}
+  .cases-nav{display:none !important;}
+  .cases-wrap{overflow-x:auto !important; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;}
+  .cases-track{transform:none !important; grid-template-columns:repeat(4, 84%) !important;}
+  .cases-track > div{scroll-snap-align:start;}
+  .row-3{grid-template-columns:1fr !important; gap:10px !important;}
+  .manifesto-t{font-size:26px !important;}
+  .note-row{grid-template-columns:1fr !important; gap:8px !important;}
+  .facts-g{grid-template-columns:1fr !important; gap:20px !important;}
+  .contact-g{grid-template-columns:1fr !important; gap:56px !important;}
+  .contact-h{font-size:34px !important;}
+  .contact-link{font-size:22px !important;}
+  .sec-h{font-size:32px !important;}
+  .page-h{font-size:42px !important;}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none !important; transition:none !important;}
+}
+</style>
+</helmet>
+<div style="--accent: {{ accent }}; font-family:'IBM Plex Sans',sans-serif; color:var(--ink); background:var(--paper); min-height:100vh;">
+
+  <!-- ===== NAV ===== -->
+  <div style="position:sticky; top:0; z-index:10; background:rgba(244,243,238,.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);">
+    <div class="wrap" style="max-width:1160px; margin:0 auto; padding:18px 48px; display:flex; justify-content:space-between; align-items:center;">
+      <a href="#top" style="display:flex; align-items:flex-start; font-family:'Onest',sans-serif; font-weight:600; font-size:22px; line-height:.9; color:var(--ink); text-decoration:none;">id<span style="color:var(--accent); font-size:8px; margin-left:2px; margin-top:2px;">●</span><span style="font-weight:400; color:var(--graphite); margin-left:7px;">consulting</span></a>
+      <div class="nav-links" style="display:flex; gap:28px; align-items:center; font-size:14px;">
+        <a href="#services" style="color:var(--graphite);">Услуги</a>
+        <a href="cases.html" style="color:var(--graphite);">Кейсы</a>
+        <a href="insights.html" style="color:var(--graphite);">Аналитика</a>
+        <a href="#geography" style="color:var(--graphite);">География</a>
+        <a href="#approach" style="color:var(--graphite);">Подход</a>
+        <a href="#contact" style="color:var(--graphite);">Контакты</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== BRAND DOT RAIL ===== -->
+  <div class="rail" style="position:fixed; left:26px; top:50%; transform:translateY(-50%); z-index:20; display:flex; flex-direction:column; align-items:center; gap:16px; pointer-events:none;">
+    <div style="position:relative; width:2px; height:240px; background:var(--line2); border-radius:1px;">
+      <div style="position:absolute; left:0; top:0; width:2px; height:{{ railFill }}; background:var(--accent); border-radius:1px; transition:height .15s linear;"></div>
+      <div style="position:absolute; left:50%; top:{{ railFill }}; transform:translate(-50%,-50%); width:12px; height:12px; border-radius:50%; background:var(--accent); box-shadow:0 0 0 5px color-mix(in srgb, var(--accent) 18%, transparent); transition:top .15s linear;"></div>
+    </div>
+    <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.22em; color:var(--graphite); writing-mode:vertical-rl; text-transform:uppercase; white-space:nowrap;">{{ activeLabel }}</div>
+  </div>
+
+  <!-- ===== SCREEN 1 · HERO ===== -->
+  <section id="top" data-screen-label="Начало" class="wrap" style="max-width:1160px; margin:0 auto; padding:96px 48px 88px;">
+    <div class="hero-grid" style="display:grid; grid-template-columns:minmax(0,1fr) minmax(240px,360px); gap:56px; align-items:center;">
+      <div>
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.2em; color:var(--accent); text-transform:uppercase; margin-bottom:26px;">Юридическое сопровождение бизнеса</div>
+        <h1 style="margin:0; font-family:'Onest',sans-serif; font-weight:600; font-size:clamp(44px,5.5vw,72px); letter-spacing:-.02em; line-height:1.05; overflow-wrap:anywhere;">
+          <span style="display:inline-block; animation:heroWord .7s cubic-bezier(.2,.7,.2,1) .05s both;">Сопровождаем<span style="color:var(--accent);">.</span></span>
+          <span style="display:inline-block; animation:heroWord .7s cubic-bezier(.2,.7,.2,1) .22s both;">Защищаем<span style="color:var(--accent);">.</span></span>
+          <span style="display:inline-block; animation:heroWord .7s cubic-bezier(.2,.7,.2,1) .39s both;">Приумножаем<span style="color:var(--accent);">.</span></span>
+        </h1>
+      </div>
+      <div class="hero-art" style="position:relative; height:400px; animation:heroFade 1s ease .5s both;">
+        <div style="position:absolute; inset:0; background-image:radial-gradient(var(--line2) 1.5px, transparent 1.5px); background-size:28px 28px; border-radius:16px;"></div>
+        <div style="position:absolute; left:50%; top:50%; width:260px; height:260px; margin:-130px 0 0 -130px; border:1px solid var(--line2); border-radius:50%;"></div>
+        <div style="position:absolute; left:50%; top:50%; width:170px; height:170px; margin:-85px 0 0 -85px; border:1px dashed var(--line2); border-radius:50%;"></div>
+        <div style="position:absolute; left:50%; top:50%; width:260px; height:260px; margin:-130px 0 0 -130px; animation:orbit 28s linear infinite;">
+          <div style="position:absolute; left:50%; top:-9px; width:18px; height:18px; margin-left:-9px; border-radius:50%; background:var(--accent); animation:dotPulse 3s ease infinite;"></div>
+        </div>
+        <div style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); display:flex; align-items:flex-start; font-family:'Onest',sans-serif; font-weight:600; font-size:56px; color:var(--ink); line-height:.9;">id<span style="color:var(--accent); font-size:18px; margin-left:4px; margin-top:5px;">●</span></div>
+        <div style="position:absolute; left:0; right:0; bottom:14px; text-align:center; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.22em; color:var(--mist);">ТОЧКА — ЗНАК РЕШЕНИЯ</div>
+      </div>
+    </div>
+    <div class="hero-sub" style="display:grid; grid-template-columns:1.4fr 1fr; gap:48px; margin-top:36px; align-items:end; animation:heroFade .8s ease .6s both;">
+      <div style="font-size:19px; color:var(--graphite); line-height:1.6; max-width:560px;">Юридическая команда рядом с вашим бизнесом каждый день: абонентское обслуживание, банкротство, приобретение и защита активов.</div>
+      <div style="display:flex; justify-content:flex-end;">
+        <a href="#contact" style="background:var(--accent); border:1px solid var(--accent); color:#fff; padding:16px 30px; border-radius:10px; font-weight:500; font-size:16px; text-decoration:none; transition:filter .2s ease;" style-hover="filter:brightness(1.12); text-decoration:none;">Обсудить задачу</a>
+      </div>
+    </div>
+    <div style="height:1px; background:var(--line2); margin:72px 0 0;"></div>
+    <div class="hero-stats" style="display:grid; grid-template-columns:repeat(3,1fr); gap:32px; margin-top:40px;">
+      <div style="border-left:2px solid var(--accent); padding-left:20px;">
+        <div style="font-family:'Onest',sans-serif; font-weight:600; font-size:38px; letter-spacing:-.02em;">2013</div>
+        <div style="font-size:14px; color:var(--graphite); margin-top:4px;">год начала практики</div>
+      </div>
+      <div style="border-left:2px solid var(--accent); padding-left:20px;">
+        <div style="font-family:'Onest',sans-serif; font-weight:600; font-size:38px; letter-spacing:-.02em;">30+</div>
+        <div style="font-size:14px; color:var(--graphite); margin-top:4px;">компаний на сопровождении</div>
+      </div>
+      <div style="border-left:2px solid var(--accent); padding-left:20px;">
+        <div style="font-family:'Onest',sans-serif; font-weight:600; font-size:38px; letter-spacing:-.02em;">13</div>
+        <div style="font-size:14px; color:var(--graphite); margin-top:4px;">городов на карте практики</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SCREEN 2 · SERVICES ===== -->
+  <section id="services" data-screen-label="Услуги" class="wrap" style="max-width:1160px; margin:0 auto; padding:8px 48px 88px;">
+    <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:12px;">
+      <h2 class="sec-h" style="margin:0; font-family:'Onest',sans-serif; font-weight:600; font-size:44px; letter-spacing:-.02em;">Чем мы занимаемся</h2>
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.18em; color:var(--mist);">PRACTICE AREAS</div>
+    </div>
+    <div class="g1" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:24px; margin-top:44px;">
+      <div onClick="{{ svcToggle0 }}" style="cursor:pointer; background:var(--card); border:1px solid {{ svcActive0 }}; border-radius:14px; padding:40px; display:flex; flex-direction:column; gap:18px; transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;" style-hover="transform:translateY(-4px); box-shadow:0 18px 36px -22px rgba(20,22,28,.3); border-color:var(--accent);">
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.18em; color:var(--accent);">01 · ЕЖЕДНЕВНО</div>
+        <div style="font-family:'Onest',sans-serif; font-weight:600; font-size:23px; line-height:1.25;">Сопровождение бизнеса</div>
+        <div style="font-size:15px; color:var(--graphite); line-height:1.65;">Юридический отдел без штата: договоры, аренда, персонал, проверки, претензии — в рамках фиксированного ежемесячного бюджета.</div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:auto;">
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--graphite); border:1px solid var(--line2); border-radius:6px; padding:5px 10px;">Абонемент</span>
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--graphite); border:1px solid var(--line2); border-radius:6px; padding:5px 10px;">Отраслевая экспертиза</span>
+        </div>
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.14em; color:var(--accent); margin-top:16px; border-bottom:1px solid transparent; align-self:flex-start; transition:border-color .2s ease;" style-hover="border-bottom-color:var(--accent);">ПОДРОБНЕЕ →</div>
+      </div>
+      <div onClick="{{ svcToggle1 }}" style="cursor:pointer; background:var(--card); border:1px solid {{ svcActive1 }}; border-radius:14px; padding:40px; display:flex; flex-direction:column; gap:18px; transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;" style-hover="transform:translateY(-4px); box-shadow:0 18px 36px -22px rgba(20,22,28,.3); border-color:var(--accent);">
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.18em; color:var(--accent);">02 · ВЛАДЕНИЕ</div>
+        <div style="font-family:'Onest',sans-serif; font-weight:600; font-size:23px; line-height:1.25;">Активы: приобретение и защита</div>
+        <div style="font-size:15px; color:var(--graphite); line-height:1.65;">Полный цикл владения: проверка и структура сделки, покупка — включая торги по банкротству — и правовая архитектура, отделяющая активы от операционных рисков.</div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:auto;">
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--graphite); border:1px solid var(--line2); border-radius:6px; padding:5px 10px;">Сделки</span>
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--graphite); border:1px solid var(--line2); border-radius:6px; padding:5px 10px;">Структура владения</span>
+        </div>
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.14em; color:var(--accent); margin-top:16px; border-bottom:1px solid transparent; align-self:flex-start; transition:border-color .2s ease;" style-hover="border-bottom-color:var(--accent);">ПОДРОБНЕЕ →</div>
+      </div>
+      <div onClick="{{ svcToggle2 }}" style="cursor:pointer; background:var(--card); border:1px solid {{ svcActive2 }}; border-radius:14px; padding:40px; display:flex; flex-direction:column; gap:18px; transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;" style-hover="transform:translateY(-4px); box-shadow:0 18px 36px -22px rgba(20,22,28,.3); border-color:var(--accent);">
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.18em; color:var(--accent);">03 · СТРУКТУРА</div>
+        <div style="font-family:'Onest',sans-serif; font-weight:600; font-size:23px; line-height:1.25;">Корпоративное право и конфликты</div>
+        <div style="font-size:15px; color:var(--graphite); line-height:1.65;">Уставы, корпоративные договоры, опционы, отношения участников. Сопровождение корпоративных конфликтов — от переговоров до судебной стратегии.</div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:auto;">
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--graphite); border:1px solid var(--line2); border-radius:6px; padding:5px 10px;">Корп. договоры</span>
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--graphite); border:1px solid var(--line2); border-radius:6px; padding:5px 10px;">Конфликты</span>
+        </div>
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.14em; color:var(--accent); margin-top:16px; border-bottom:1px solid transparent; align-self:flex-start; transition:border-color .2s ease;" style-hover="border-bottom-color:var(--accent);">ПОДРОБНЕЕ →</div>
+      </div>
+      <div onClick="{{ svcToggle3 }}" style="cursor:pointer; background:var(--card); border:1px solid {{ svcActive3 }}; border-radius:14px; padding:40px; display:flex; flex-direction:column; gap:18px; transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;" style-hover="transform:translateY(-4px); box-shadow:0 18px 36px -22px rgba(20,22,28,.3); border-color:var(--accent);">
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.18em; color:var(--accent);">04 · ПРОЦЕДУРЫ</div>
+        <div style="font-family:'Onest',sans-serif; font-weight:600; font-size:23px; line-height:1.25;">Банкротство и требования</div>
+        <div style="font-size:15px; color:var(--graphite); line-height:1.65;">Процедуры со стороны должника и кредитора: стратегия, реестр, оспаривание сделок, субсидиарная ответственность. Взыскание долгов — с трезвой оценкой перспектив до начала расходов.</div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:auto;">
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--graphite); border:1px solid var(--line2); border-radius:6px; padding:5px 10px;">30+ процедур · 2026</span>
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--graphite); border:1px solid var(--line2); border-radius:6px; padding:5px 10px;">Субсидиарка</span>
+        </div>
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.14em; color:var(--accent); margin-top:16px; border-bottom:1px solid transparent; align-self:flex-start; transition:border-color .2s ease;" style-hover="border-bottom-color:var(--accent);">ПОДРОБНЕЕ →</div>
+      </div>
+      <div onClick="{{ svcToggle4 }}" class="svc-wide" style="cursor:pointer; grid-column:span 2; background:var(--ink); border:1px solid {{ svcActive4 }}; border-radius:14px; padding:40px; display:flex; flex-direction:column; gap:18px; color:#fff; transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;" style-hover="transform:translateY(-4px); box-shadow:0 18px 36px -22px rgba(20,22,28,.5); border-color:var(--accent);">
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.18em; color:var(--accent);">05 · ПАРТНЁРСКИЙ УРОВЕНЬ</div>
+        <div style="font-family:'Onest',sans-serif; font-weight:600; font-size:23px; line-height:1.25;">Специальные ситуации</div>
+        <div style="font-size:15px; color:rgba(255,255,255,.65); line-height:1.65; max-width:560px;">Нестандартные задачи на стыке практик: споры с участием государства, активы с непростой историей приобретения, кризисные сценарии.</div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:auto;">
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:rgba(255,255,255,.7); border:1px solid rgba(255,255,255,.25); border-radius:6px; padding:5px 10px;">Споры с государством</span>
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:rgba(255,255,255,.7); border:1px solid rgba(255,255,255,.25); border-radius:6px; padding:5px 10px;">Кризисные сценарии</span>
+        </div>
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.14em; color:var(--accent); margin-top:16px; border-bottom:1px solid transparent; align-self:flex-start; transition:border-color .2s ease;" style-hover="border-bottom-color:var(--accent);">ПОДРОБНЕЕ →</div>
+      </div>
+    </div>
+    <sc-if value="{{ svcOpen }}" hint-placeholder-val="{{ false }}">
+      <div id="svc-detail" style="margin-top:24px; background:var(--card); border:1px solid var(--accent); border-radius:14px; padding:44px 48px; box-shadow:0 24px 48px -32px rgba(20,22,28,.45);">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:32px;">
+          <div>
+            <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.18em; color:var(--accent);">{{ svc.code }}</div>
+            <div style="font-family:'Onest',sans-serif; font-weight:600; font-size:30px; letter-spacing:-.015em; margin-top:12px;">{{ svc.title }}</div>
+          </div>
+          <button onClick="{{ svcClose }}" style="width:40px; height:40px; flex-shrink:0; border-radius:50%; border:1px solid var(--line2); background:var(--paper); color:var(--ink); font-size:16px; cursor:pointer;" style-hover="border-color:var(--ink);">✕</button>
+        </div>
+        <div style="font-size:18px; color:var(--graphite); line-height:1.65; max-width:760px; margin-top:20px;">{{ svc.lead }}</div>
+        <div class="svc-detail" style="display:grid; grid-template-columns:1fr 1.2fr; gap:48px; margin-top:36px; border-top:1px solid var(--line); padding-top:32px;">
+          <div>
+            <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.18em; color:var(--mist); margin-bottom:18px;">КОГДА ОБРАЩАЮТСЯ</div>
+            <div style="display:flex; flex-direction:column; gap:14px;">
+              <sc-for list="{{ svcWhen }}" as="w" hint-placeholder-count="3">
+                <div style="display:flex; gap:12px; font-size:16px; color:var(--ink); line-height:1.55;"><span style="color:var(--accent); flex-shrink:0;">●</span>{{ w.t }}</div>
+              </sc-for>
+            </div>
+          </div>
+          <div>
+            <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.18em; color:var(--mist); margin-bottom:18px;">ЧТО ВХОДИТ</div>
+            <div style="display:grid; gap:12px;">
+              <sc-for list="{{ svcIncludes }}" as="it" hint-placeholder-count="6">
+                <div style="font-size:16px; color:var(--graphite); line-height:1.55; border-bottom:1px solid var(--line); padding-bottom:12px;">{{ it.t }}</div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex; gap:28px; align-items:center; flex-wrap:wrap; margin-top:32px;">
+          <a href="#contact" style="background:var(--accent); color:#fff; padding:15px 28px; border-radius:10px; font-weight:500; font-size:16px; text-decoration:none; transition:filter .2s ease;" style-hover="filter:brightness(1.12); text-decoration:none;">Обсудить задачу</a>
+          <sc-if value="{{ svcHasLink }}" hint-placeholder-val="{{ false }}">
+            <a href="{{ svcLink }}" style="font-size:16px; font-weight:500;">{{ svcLinkText }}</a>
+          </sc-if>
+        </div>
+      </div>
+    </sc-if>
+  </section>
+
+  <!-- ===== SCREEN 3 · APPROACH ===== -->
+  <section id="cases" data-screen-label="Кейсы" style="cursor:pointer; background:var(--accent-tint); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+    <div class="wrap" style="max-width:1160px; margin:0 auto; padding:88px 48px;">
+    <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:12px;">
+      <h2 class="sec-h" style="margin:0; font-family:'Onest',sans-serif; font-weight:600; font-size:44px; letter-spacing:-.02em;">Кому мы полезны <a href="cases.html" style="font-size:16px; font-weight:500; vertical-align:middle; margin-left:12px; white-space:nowrap;">все кейсы →</a></h2>
+      <div class="cases-nav" style="display:flex; gap:10px; align-items:center;">
+        <button onClick="{{ casesPrev }}" disabled="{{ atStart }}" style="width:44px; height:44px; border-radius:50%; border:1px solid var(--line2); background:var(--card); color:var(--ink); font-size:18px; cursor:pointer; opacity:{{ prevOpacity }};" style-hover="border-color:var(--ink);">←</button>
+        <button onClick="{{ casesNext }}" disabled="{{ atEnd }}" style="width:44px; height:44px; border-radius:50%; border:1px solid var(--line2); background:var(--card); color:var(--ink); font-size:18px; cursor:pointer; opacity:{{ nextOpacity }};" style-hover="border-color:var(--ink);">→</button>
+      </div>
+    </div>
+    <div class="cases-wrap" style="overflow:hidden; margin-top:44px;">
+    <div class="cases-track" style="display:grid; grid-template-columns:repeat(4, calc((100% - 48px) / 3)); gap:24px; transform:translateX({{ trackShift }}); transition:transform .45s cubic-bezier(.4,0,.2,1);">
+      <div style="background:var(--card); color:var(--ink); border:1px solid var(--line); border-radius:14px; padding:40px; display:flex; flex-direction:column; gap:18px; transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;" style-hover="transform:translateY(-4px); box-shadow:0 18px 36px -22px rgba(20,22,28,.3); border-color:var(--accent);">
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.18em; color:var(--accent);">КРУПНЫЙ БИЗНЕС · ПРОЕКТНАЯ РАБОТА</div>
+        <div style="font-family:'Onest',sans-serif; font-weight:600; font-size:23px; line-height:1.25;">Федеральный девелопер: банкротная практика под ключ</div>
+        <div style="font-size:15px; color:var(--graphite); line-height:1.65;">Выделенная команда для девелопера федерального масштаба: взыскание задолженности, процедуры должников, приобретение активов на торгах, сопровождение споров.</div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:auto;">
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--graphite); border:1px solid var(--line2); border-radius:6px; padding:5px 10px;">Взыскание</span>
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--graphite); border:1px solid var(--line2); border-radius:6px; padding:5px 10px;">Банкротство</span>
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--graphite); border:1px solid var(--line2); border-radius:6px; padding:5px 10px;">Приобретение активов</span>
+        </div>
+      </div>
+      <div style="background:var(--card); color:var(--ink); border:1px solid var(--line); border-radius:14px; padding:40px; display:flex; flex-direction:column; gap:18px; transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;" style-hover="transform:translateY(-4px); box-shadow:0 18px 36px -22px rgba(20,22,28,.3); border-color:var(--accent);">
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.18em; color:var(--accent);">СРЕДНИЙ БИЗНЕС · СОПРОВОЖДЕНИЕ</div>
+        <div style="font-family:'Onest',sans-serif; font-weight:600; font-size:23px; line-height:1.25;">Операционный бизнес: юридический отдел на абонементе</div>
+        <div style="font-size:15px; color:var(--graphite); line-height:1.65;">Сопровождение сетевых клиник, ресторанов и магазинов: договоры, аренда, персонал, проверки. Для медицины — отраслевая экспертиза: лицензирование, требования регуляторов, споры с пациентами.</div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:auto;">
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--graphite); border:1px solid var(--line2); border-radius:6px; padding:5px 10px;">Медицина</span>
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--graphite); border:1px solid var(--line2); border-radius:6px; padding:5px 10px;">Рестораны</span>
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--graphite); border:1px solid var(--line2); border-radius:6px; padding:5px 10px;">Ритейл</span>
+        </div>
+      </div>
+      <div style="background:var(--card); color:var(--ink); border:1px solid var(--line); border-radius:14px; padding:40px; display:flex; flex-direction:column; gap:18px; transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;" style-hover="transform:translateY(-4px); box-shadow:0 18px 36px -22px rgba(20,22,28,.3); border-color:var(--accent);">
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.18em; color:var(--accent);">ЗАЩИТА АКТИВОВ · СПОРЫ</div>
+        <div style="font-family:'Onest',sans-serif; font-weight:600; font-size:23px; line-height:1.25;">Корпоративный спор вокруг торгового объекта в Сочи</div>
+        <div style="font-size:15px; color:var(--graphite); line-height:1.65;">Защита прав собственника в затяжном конфликте участников: работа со структурой владения, переговорная позиция, судебная стратегия.</div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:auto;">
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--graphite); border:1px solid var(--line2); border-radius:6px; padding:5px 10px;">Недвижимость</span>
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--graphite); border:1px solid var(--line2); border-radius:6px; padding:5px 10px;">Корпоративный конфликт</span>
+        </div>
+      </div>
+      <div style="background:var(--card); color:var(--ink); border:1px solid var(--line); border-radius:14px; padding:40px; display:flex; flex-direction:column; gap:18px; transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;" style-hover="transform:translateY(-4px); box-shadow:0 18px 36px -22px rgba(20,22,28,.3); border-color:var(--accent);">
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.18em; color:var(--accent);">ЗАЩИТА АКТИВОВ · СТРАТЕГИЯ</div>
+        <div style="font-family:'Onest',sans-serif; font-weight:600; font-size:23px; line-height:1.25;">Защита актива, приобретённого в банкротстве 2000-х</div>
+        <div style="font-size:15px; color:var(--graphite); line-height:1.65;">Стратегия защиты от притязаний государства: анализ истории приобретения, правовая позиция собственника, план действий на разные сценарии.</div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:auto;">
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--graphite); border:1px solid var(--line2); border-radius:6px; padding:5px 10px;">Защита активов</span>
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--graphite); border:1px solid var(--line2); border-radius:6px; padding:5px 10px;">Споры с государством</span>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+  </section>
+
+  <!-- ===== MID CTA ===== -->
+  <div class="wrap" style="max-width:1160px; margin:0 auto; padding:0 48px;">
+    <div style="position:relative; overflow:hidden; background:var(--ink); border-radius:14px; padding:44px 48px; display:flex; justify-content:space-between; align-items:center; gap:28px; flex-wrap:wrap;">
+      <div style="position:absolute; inset:0; background-image:radial-gradient(var(--accent) 1.5px, transparent 1.5px); background-size:26px 26px; opacity:.16;"></div>
+      <div style="position:relative; font-family:'Onest',sans-serif; font-weight:600; font-size:28px; letter-spacing:-.01em; color:#fff;">Похожая задача? Расскажите — оценим перспективы<span style="color:var(--accent);">.</span></div>
+      <a href="#contact" style="position:relative; background:var(--accent); color:#fff; padding:18px 34px; border-radius:10px; font-weight:600; font-size:17px; text-decoration:none; flex-shrink:0; box-shadow:0 10px 26px -8px color-mix(in srgb, var(--accent) 65%, transparent); transition:filter .2s ease, transform .2s ease;" style-hover="filter:brightness(1.14); transform:translateY(-2px); text-decoration:none;">Обсудить задачу →</a>
+    </div>
+  </div>
+
+  <!-- ===== APPROACH ===== -->
+  <section id="approach" data-screen-label="Подход" class="wrap" style="max-width:1160px; margin:0 auto; padding:96px 48px 88px;">
+    <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:12px;">
+      <h2 class="sec-h" style="margin:0; font-family:'Onest',sans-serif; font-weight:600; font-size:44px; letter-spacing:-.02em;">Как мы работаем</h2>
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.18em; color:var(--mist);">APPROACH</div>
+    </div>
+    <sc-if value="{{ apCards }}" hint-placeholder-val="{{ true }}">
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:44px;">
+      <div style="background:var(--card); border:1px solid var(--line); border-radius:14px; padding:36px; transition:transform .25s ease, box-shadow .25s ease;" style-hover="transform:translateY(-4px); box-shadow:0 18px 36px -22px rgba(20,22,28,.3);">
+        <div style="width:12px; height:12px; border-radius:50%; background:var(--accent); margin-bottom:22px;"></div>
+        <div style="font-family:'Onest',sans-serif; font-weight:600; font-size:20px;">Команда по масштабу задачи</div>
+        <div style="font-size:15px; color:var(--graphite); line-height:1.65; margin-top:10px;">Крупные проекты ведёт партнёр лично. Текущие вопросы — профильные юристы команды: быстрее и без лишних затрат для клиента. За результат в любом случае отвечает фирма.</div>
+      </div>
+      <div style="background:var(--card); border:1px solid var(--line); border-radius:14px; padding:36px; transition:transform .25s ease, box-shadow .25s ease;" style-hover="transform:translateY(-4px); box-shadow:0 18px 36px -22px rgba(20,22,28,.3);">
+        <div style="width:12px; height:12px; border-radius:50%; background:var(--accent); margin-bottom:22px;"></div>
+        <div style="font-family:'Onest',sans-serif; font-weight:600; font-size:20px;">Просто о сложном</div>
+        <div style="font-size:15px; color:var(--graphite); line-height:1.65; margin-top:10px;">Заключения пишем языком бизнеса: риск, варианты, рекомендация. Без канцелярита и страниц, которые никто не читает.</div>
+      </div>
+      <div style="background:var(--card); border:1px solid var(--line); border-radius:14px; padding:36px; transition:transform .25s ease, box-shadow .25s ease;" style-hover="transform:translateY(-4px); box-shadow:0 18px 36px -22px rgba(20,22,28,.3);">
+        <div style="width:12px; height:12px; border-radius:50%; background:var(--accent); margin-bottom:22px;"></div>
+        <div style="font-family:'Onest',sans-serif; font-weight:600; font-size:20px;">Предсказуемый бюджет</div>
+        <div style="font-size:15px; color:var(--graphite); line-height:1.65; margin-top:10px;">Стоимость фиксируем до начала работы — абонентская плата или цена проекта. Без счетов-сюрпризов за каждый звонок.</div>
+      </div>
+    </div>
+    </sc-if>
+    <sc-if value="{{ apList }}" hint-placeholder-val="{{ false }}">
+    <div style="margin-top:44px; border-top:1px solid var(--line2);">
+      <div style="display:grid; grid-template-columns:70px 1fr 1.4fr; gap:28px; padding:32px 8px; border-bottom:1px solid var(--line2); align-items:baseline; transition:background .2s ease, padding-left .25s ease;" style-hover="background:rgba(20,22,28,.03); padding-left:16px;">
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--accent);">/ 01</div>
+        <div style="font-family:'Onest',sans-serif; font-weight:600; font-size:23px;">Команда по масштабу задачи</div>
+        <div style="font-size:15px; color:var(--graphite); line-height:1.65;">Крупные проекты ведёт партнёр лично. Текущие вопросы — профильные юристы команды: быстрее и без лишних затрат. За результат отвечает фирма.</div>
+      </div>
+      <div style="display:grid; grid-template-columns:70px 1fr 1.4fr; gap:28px; padding:32px 8px; border-bottom:1px solid var(--line2); align-items:baseline; transition:background .2s ease, padding-left .25s ease;" style-hover="background:rgba(20,22,28,.03); padding-left:16px;">
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--accent);">/ 02</div>
+        <div style="font-family:'Onest',sans-serif; font-weight:600; font-size:23px;">Просто о сложном</div>
+        <div style="font-size:15px; color:var(--graphite); line-height:1.65;">Заключения пишем языком бизнеса: риск, варианты, рекомендация. Без канцелярита и страниц, которые никто не читает.</div>
+      </div>
+      <div style="display:grid; grid-template-columns:70px 1fr 1.4fr; gap:28px; padding:32px 8px; border-bottom:1px solid var(--line2); align-items:baseline; transition:background .2s ease, padding-left .25s ease;" style-hover="background:rgba(20,22,28,.03); padding-left:16px;">
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--accent);">/ 03</div>
+        <div style="font-family:'Onest',sans-serif; font-weight:600; font-size:23px;">Предсказуемый бюджет</div>
+        <div style="font-size:15px; color:var(--graphite); line-height:1.65;">Стоимость фиксируем до начала работы — абонентская плата или цена проекта. Без счетов-сюрпризов за каждый звонок.</div>
+      </div>
+    </div>
+    </sc-if>
+    <sc-if value="{{ apManifesto }}" hint-placeholder-val="{{ false }}">
+    <div style="margin-top:44px;">
+      <div class="manifesto-t" style="font-family:'Onest',sans-serif; font-weight:600; font-size:36px; letter-spacing:-.015em; line-height:1.3; max-width:900px; text-wrap:balance;">Мы работаем так, как хотели бы, чтобы работали с нами: <span style="color:var(--accent);">партнёр в крупных проектах</span>, заключения языком бизнеса и <span style="color:var(--accent);">бюджет, зафиксированный до начала</span> — без счетов-сюрпризов.</div>
+      <div style="display:flex; gap:12px; margin-top:36px; flex-wrap:wrap;">
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.08em; color:var(--ink); border:1px solid var(--line2); border-radius:100px; padding:10px 20px;">● Команда по масштабу задачи</span>
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.08em; color:var(--ink); border:1px solid var(--line2); border-radius:100px; padding:10px 20px;">● Просто о сложном</span>
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.08em; color:var(--ink); border:1px solid var(--line2); border-radius:100px; padding:10px 20px;">● Предсказуемый бюджет</span>
+      </div>
+    </div>
+    </sc-if>
+    <sc-if value="{{ apSplit }}" hint-placeholder-val="{{ false }}">
+    <div style="display:grid; grid-template-columns:1fr 1.2fr; gap:24px; margin-top:44px;">
+      <div style="background:var(--ink); color:#fff; border-radius:14px; padding:44px; display:flex; flex-direction:column; justify-content:space-between; gap:32px;">
+        <div style="width:12px; height:12px; border-radius:50%; background:var(--accent);"></div>
+        <div style="font-family:'Onest',sans-serif; font-weight:600; font-size:26px; line-height:1.35;">«Хороший юрист экономит клиенту больше, чем стоит сам. Это и есть критерий нашей работы».</div>
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.18em; color:rgba(255,255,255,.45);">УПРАВЛЯЮЩИЙ ПАРТНЁР</div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:16px;">
+        <div style="background:var(--card); border:1px solid var(--line); border-radius:14px; padding:26px 32px; display:flex; gap:24px; align-items:baseline;">
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--accent); flex-shrink:0;">/ 01</div>
+          <div><span style="font-family:'Onest',sans-serif; font-weight:600; font-size:18px;">Команда по масштабу задачи.</span> <span style="font-size:15px; color:var(--graphite); line-height:1.6;">Крупные проекты ведёт партнёр, текущие вопросы — профильные юристы.</span></div>
+        </div>
+        <div style="background:var(--card); border:1px solid var(--line); border-radius:14px; padding:26px 32px; display:flex; gap:24px; align-items:baseline;">
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--accent); flex-shrink:0;">/ 02</div>
+          <div><span style="font-family:'Onest',sans-serif; font-weight:600; font-size:18px;">Просто о сложном.</span> <span style="font-size:15px; color:var(--graphite); line-height:1.6;">Риск, варианты, рекомендация — языком бизнеса, без канцелярита.</span></div>
+        </div>
+        <div style="background:var(--card); border:1px solid var(--line); border-radius:14px; padding:26px 32px; display:flex; gap:24px; align-items:baseline;">
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--accent); flex-shrink:0;">/ 03</div>
+          <div><span style="font-family:'Onest',sans-serif; font-weight:600; font-size:18px;">Предсказуемый бюджет.</span> <span style="font-size:15px; color:var(--graphite); line-height:1.6;">Стоимость фиксируем до начала работы. Без счетов-сюрпризов.</span></div>
+        </div>
+      </div>
+    </div>
+    </sc-if>
+  </section>
+
+  <!-- ===== FACTS ===== -->
+  <section id="facts" data-screen-label="О нас" class="wrap" style="max-width:1160px; margin:0 auto; padding:88px 48px;">
+    <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:12px;">
+      <h2 class="sec-h" style="margin:0; font-family:'Onest',sans-serif; font-weight:600; font-size:44px; letter-spacing:-.02em;">Несколько фактов о нас</h2>
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.18em; color:var(--mist);">БЕЗ ПРОТОКОЛА</div>
+    </div>
+    <div class="facts-grid" style="display:grid; grid-template-columns:repeat(3,1fr); gap:1px; margin-top:44px; background:var(--line); border:1px solid var(--line); border-radius:14px; overflow:hidden;">
+      <div style="background:var(--card); padding:34px 30px 32px; display:flex; flex-direction:column; gap:14px;">
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.2em; color:var(--accent);">01</div>
+        <div style="font-family:'Onest',sans-serif; font-weight:600; font-size:20px; line-height:1.35;">Самый частый вопрос клиента — «а это законно?»</div>
+        <div style="font-size:15px; color:var(--graphite); line-height:1.6;">Второй по частоте — «а если очень нужно?». Ответ на второй всегда занимает больше времени.</div>
+      </div>
+      <div style="background:var(--card); padding:34px 30px 32px; display:flex; flex-direction:column; gap:14px;">
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.2em; color:var(--accent);">02</div>
+        <div style="font-family:'Onest',sans-serif; font-weight:600; font-size:20px; line-height:1.35;">У нас есть папка «так делать нельзя»</div>
+        <div style="font-size:15px; color:var(--graphite); line-height:1.6;">Собираем чужие ошибки в договорах с 2013 года. Клиентам показываем бесплатно.</div>
+      </div>
+      <div style="background:var(--card); padding:34px 30px 32px; display:flex; flex-direction:column; gap:14px;">
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.2em; color:var(--accent);">03</div>
+        <div style="font-family:'Onest',sans-serif; font-weight:600; font-size:20px; line-height:1.35;">Лучший наш кейс — тот, которого не было</div>
+        <div style="font-size:15px; color:var(--graphite); line-height:1.6;">Спор, предотвращённый за один звонок, в портфолио не попадает. Зато остаётся в бюджете клиента.</div>
+      </div>
+      
+      
+    </div>
+  </section>
+
+  <!-- ===== INSIGHTS ===== -->
+  <section id="insights" data-screen-label="Аналитика" style="background:var(--card); border-top:1px solid var(--line);">
+    <div class="wrap" style="max-width:1160px; margin:0 auto; padding:88px 48px;">
+      <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:12px;">
+        <h2 class="sec-h" style="margin:0; font-family:'Onest',sans-serif; font-weight:600; font-size:44px; letter-spacing:-.02em;">Аналитика</h2>
+        <a href="insights.html" style="font-size:15px; font-weight:500;">все заметки →</a>
+      </div>
+      <div style="margin-top:40px; border-top:1px solid var(--line2);">
+        <a href="insights.html" class="note-row" style="display:grid; grid-template-columns:150px 1fr auto; gap:32px; padding:30px 8px; border-bottom:1px solid var(--line2); align-items:baseline; color:inherit; text-decoration:none; transition:background .2s ease, padding-left .25s ease;" style-hover="background:rgba(20,22,28,.03); padding-left:16px; text-decoration:none;">
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--mist);">ИЮЛЬ 2026</div>
+          <div style="font-family:'Onest',sans-serif; font-weight:600; font-size:21px; line-height:1.3;">Субсидиарная ответственность: за что директору отвечать личным имуществом</div>
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--accent);">БАНКРОТСТВО →</div>
+        </a>
+        <a href="insights.html" class="note-row" style="display:grid; grid-template-columns:150px 1fr auto; gap:32px; padding:30px 8px; border-bottom:1px solid var(--line2); align-items:baseline; color:inherit; text-decoration:none; transition:background .2s ease, padding-left .25s ease;" style-hover="background:rgba(20,22,28,.03); padding-left:16px; text-decoration:none;">
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--mist);">ИЮНЬ 2026</div>
+          <div style="font-family:'Onest',sans-serif; font-weight:600; font-size:21px; line-height:1.3;">Деприватизация: как проверить уязвимость актива с историей</div>
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--accent);">ЗАЩИТА АКТИВОВ →</div>
+        </a>
+        <a href="insights.html" class="note-row" style="display:grid; grid-template-columns:150px 1fr auto; gap:32px; padding:30px 8px; border-bottom:1px solid var(--line2); align-items:baseline; color:inherit; text-decoration:none; transition:background .2s ease, padding-left .25s ease;" style-hover="background:rgba(20,22,28,.03); padding-left:16px; text-decoration:none;">
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--mist);">МАЙ 2026</div>
+          <div style="font-family:'Onest',sans-serif; font-weight:600; font-size:21px; line-height:1.3;">Оспаривание сделок в банкротстве: трёхлетняя зона риска</div>
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--accent);">БАНКРОТСТВО →</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== GEOGRAPHY ===== -->
+  <section id="geography" data-screen-label="География" class="wrap" style="max-width:1160px; margin:0 auto; padding:88px 48px;">
+    <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:12px;">
+      <h2 class="sec-h" style="margin:0; font-family:'Onest',sans-serif; font-weight:600; font-size:44px; letter-spacing:-.02em;">География практики</h2>
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.18em; color:var(--mist);">13 ГОРОДОВ · РФ И КАЗАХСТАН</div>
+    </div>
+    <div style="margin-top:40px; background:var(--card); border:1px solid var(--line); border-radius:14px; overflow:hidden;">
+      <x-import component-from-global-scope="geo-map" from="./geo-map.js" accent="{{ accent }}" ink="#14161c" hint-size="100%,560px"></x-import>
+    </div>
+    <div style="margin-top:20px; display:flex; flex-wrap:wrap; gap:10px 24px; font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.14em; color:var(--graphite);">
+      <div style="display:flex; align-items:center; gap:8px;"><span style="width:7px;height:7px;border-radius:50%;background:var(--accent);display:inline-block;"></span>МОСКВА</div>
+      <div>САНКТ-ПЕТЕРБУРГ</div><div>КАЗАНЬ</div><div>РОСТОВ-НА-ДОНУ</div><div>КРАСНОДАР</div><div>СОЧИ</div><div>МАЙКОП</div><div>МАХАЧКАЛА</div><div>ВОРОНЕЖ</div><div>ОРЁЛ</div><div>ВЛАДИКАВКАЗ</div><div>КЕМЕРОВО</div><div>АЛМАТЫ</div>
+    </div>
+  </section>
+
+  <!-- ===== SCREEN 4 · CONTACT ===== -->
+  <section id="contact" data-screen-label="Контакты" style="background:var(--ink); color:#fff;">
+    <div class="wrap" style="max-width:1160px; margin:0 auto; padding:104px 48px 96px;">
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.2em; color:rgba(255,255,255,.45);">КОНТАКТЫ</div>
+      <div class="contact-g" style="display:grid; grid-template-columns:1.1fr 1fr; gap:96px; margin-top:32px;">
+        <div>
+          <div class="contact-h" style="font-family:'Onest',sans-serif; font-weight:600; font-size:52px; letter-spacing:-.02em; line-height:1.08;">Если наша практика соответствует вашей задаче — напишите<span style="color:var(--accent);">.</span></div>
+          <div style="font-size:16px; color:rgba(255,255,255,.55); line-height:1.65; margin-top:22px; max-width:420px;">Отвечаем в течение рабочего дня. Обращение остаётся конфиденциальным и ни к чему не обязывает.</div>
+          <div style="margin-top:56px; display:flex; flex-direction:column; gap:4px;">
+            <a href="tel:+74950000000" class="contact-link" style="font-family:'Onest',sans-serif; font-weight:500; font-size:30px; color:#fff; text-decoration:none; letter-spacing:-.01em;" style-hover="color:var(--accent); text-decoration:none;">+7 495 000 00 00</a>
+            <a href="mailto:hello@idconsulting.legal" class="contact-link" style="font-family:'Onest',sans-serif; font-weight:500; font-size:30px; color:#fff; text-decoration:none; letter-spacing:-.01em;" style-hover="color:var(--accent); text-decoration:none;">hello@idconsulting.legal</a>
+          </div>
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.14em; color:rgba(255,255,255,.4); margin-top:28px;">МОСКВА · РАБОТАЕМ ПО ВСЕЙ РОССИИ</div>
+        </div>
+        <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex; flex-direction:column; gap:36px; padding-top:10px;">
+            <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.2em; color:rgba(255,255,255,.45);">ИЛИ ОСТАВЬТЕ ТЕЛЕФОН</div>
+            <input value="{{ name }}" onChange="{{ onName }}" placeholder="Имя" style="font-family:'IBM Plex Sans',sans-serif; font-size:18px; padding:12px 0; border:none; border-bottom:1px solid rgba(255,255,255,.25); background:transparent; color:#fff; outline:none; width:100%; border-radius:0; transition:border-color .2s;" style-focus="border-bottom-color:var(--accent);">
+            <input value="{{ contact }}" onChange="{{ onContact }}" placeholder="Телефон" style="font-family:'IBM Plex Sans',sans-serif; font-size:18px; padding:12px 0; border:none; border-bottom:1px solid rgba(255,255,255,.25); background:transparent; color:#fff; outline:none; width:100%; border-radius:0; transition:border-color .2s;" style-focus="border-bottom-color:var(--accent);">
+            <input value="{{ message }}" onChange="{{ onMessage }}" placeholder="Пара слов о задаче — по желанию" style="font-family:'IBM Plex Sans',sans-serif; font-size:18px; padding:12px 0; border:none; border-bottom:1px solid rgba(255,255,255,.25); background:transparent; color:#fff; outline:none; width:100%; border-radius:0; transition:border-color .2s;" style-focus="border-bottom-color:var(--accent);">
+            <label style="display:flex; gap:12px; align-items:flex-start; cursor:pointer; margin-top:4px;">
+              <input type="checkbox" checked="{{ agreed }}" onChange="{{ onAgree }}" style="width:18px; height:18px; margin:2px 0 0; accent-color:var(--accent); flex-shrink:0; cursor:pointer;">
+              <span style="font-size:13px; color:rgba(255,255,255,.55); line-height:1.55;">Я согласен на обработку персональных данных в соответствии с <a href="privacy.html" style="color:#fff; text-decoration:underline;">политикой обработки персональных данных</a>.</span>
+            </label>
+            <div style="display:flex; justify-content:flex-end; align-items:center; gap:24px;">
+              <button onClick="{{ onSend }}" disabled="{{ cantSend }}" style="font-family:'Onest',sans-serif; background:none; border:none; color:#fff; font-weight:600; font-size:18px; cursor:pointer; padding:0 0 4px; border-bottom:2px solid var(--accent); flex-shrink:0; opacity:{{ sendOpacity }}; transition:color .2s, opacity .2s;" style-hover="color:var(--accent);">Отправить →</button>
+            </div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex; flex-direction:column; justify-content:center; align-items:flex-start; gap:18px; border-left:2px solid var(--accent); padding-left:40px;">
+            <div style="width:12px; height:12px; border-radius:50%; background:var(--accent);"></div>
+            <div style="font-family:'Onest',sans-serif; font-weight:600; font-size:30px;">Заявка отправлена<span style="color:var(--accent);">.</span></div>
+            <div style="font-size:16px; color:rgba(255,255,255,.55); line-height:1.6;">Спасибо, {{ sentName }}. Свяжемся с вами в течение рабочего дня.</div>
+            <button onClick="{{ onReset }}" style="font-family:'IBM Plex Sans',sans-serif; background:none; border:none; color:rgba(255,255,255,.5); font-size:14px; cursor:pointer; padding:0; text-decoration:underline;" style-hover="color:#fff;">Отправить ещё одну</button>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+    <div style="border-top:1px solid rgba(255,255,255,.12);">
+      <div class="wrap" style="max-width:1160px; margin:0 auto; padding:26px 48px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+        <div style="display:flex; align-items:flex-start; font-family:'Onest',sans-serif; font-weight:600; font-size:17px; line-height:.9; color:#fff;">id<span style="color:var(--accent); font-size:6px; margin-left:2px; margin-top:2px;">●</span></div>
+        <div style="display:flex; gap:24px; align-items:center; flex-wrap:wrap; font-family:'IBM Plex Mono',monospace; font-size:11px; color:rgba(255,255,255,.35);">
+          <span>© 2026 id consulting · ООО «АйДи Консалтинг»</span>
+          <a href="privacy.html" style="color:rgba(255,255,255,.55);">Политика ПДн</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;accentColor&quot;: { &quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#2f4ee6&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;options&quot;: [&quot;#2f4ee6&quot;, &quot;#5b3ee6&quot;, &quot;#0f5f4a&quot;, &quot;#14161c&quot;], &quot;section&quot;: &quot;Brand&quot; },
+  &quot;approachVariant&quot;: { &quot;editor&quot;: &quot;enum&quot;, &quot;default&quot;: &quot;Манифест&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;options&quot;: [&quot;Карточки&quot;, &quot;Список&quot;, &quot;Манифест&quot;, &quot;Цитата + принципы&quot;], &quot;section&quot;: &quot;Секция «Как мы работаем»&quot; }
+}">
+class Component extends DCLogic {
+  state = { name: '', company: '', contact: '', message: '', sent: false, sentName: '', caseIndex: 0, progress: 0, activeLabel: 'id — старт', openFaq: -1, openSvc: -1 };
+  static SVCS = [
+    { code: '01 · ЕЖЕДНЕВНО', title: 'Сопровождение бизнеса',
+      lead: 'Внешний юридический отдел с фиксированной ежемесячной платой. Вы не держите штат и не считаете часы — задачи ставятся в рабочем чате, ответ приходит в тот же день.',
+      when: ['Юрист нужен постоянно, но нагрузки на полную ставку нет', 'Штатный юрист не закрывает отраслевую специфику', 'Договоры подписываются быстрее, чем их успевают проверять'],
+      includes: ['Разработка и проверка договоров, протоколы разногласий', 'Аренда: согласование условий, споры с арендодателем', 'Кадровые документы, увольнения, проверки трудовой инспекции', 'Претензионная работа и досудебное урегулирование', 'Сопровождение проверок контролирующих органов', 'Консультации собственника и руководителей — без ограничения по количеству'] },
+    { code: '02 · ВЛАДЕНИЕ', title: 'Активы: приобретение и защита',
+      lead: 'Полный цикл: проверить объект до покупки, купить на понятных условиях и выстроить структуру владения так, чтобы операционные риски не доходили до актива.',
+      when: ['Планируется покупка объекта, доли или предприятия', 'Интересный лот выставлен на торги по банкротству', 'Активы и операционная деятельность лежат в одном юрлице'],
+      includes: ['Юридический due diligence: история приобретения, обременения, риски оспаривания', 'Структура сделки и договорная защита покупателя', 'Участие в торгах по банкротству — от заявки до регистрации права', 'Разделение активов и операционных рисков между юрлицами', 'Проверка уязвимости объектов с историей 1990–2000-х', 'Сопровождение регистрации прав'] },
+    { code: '03 · СТРУКТУРА', title: 'Корпоративное право и конфликты',
+      lead: 'Правила игры между участниками — на бумаге и до конфликта. А если конфликт уже начался, работаем на позицию клиента: от переговоров до суда.',
+      when: ['В бизнес входит партнёр или инвестор', 'Участники перестали договариваться', 'Нужен опцион или мотивационная программа для команды'],
+      includes: ['Уставы и корпоративные договоры под реальную договорённость сторон', 'Опционы, доли, выход и вход участников', 'Реорганизации, ликвидации, смена структуры группы', 'Оспаривание решений органов управления и сделок', 'Восстановление корпоративного контроля', 'Судебная стратегия и переговорная позиция'] },
+    { code: '04 · ПРОЦЕДУРЫ', title: 'Банкротство и требования',
+      lead: 'Работаем с обеих сторон процедуры: защищаем должника и его руководителей либо ведём интересы кредитора. До начала расходов оцениваем, что реально получится взыскать.',
+      when: ['Контрагент не платит и уходит в банкротство', 'Должник вывел активы перед процедурой', 'Директору или собственнику грозит субсидиарная ответственность'],
+      includes: ['Оценка перспектив взыскания до начала расходов', 'Включение требований в реестр кредиторов', 'Оспаривание сделок должника', 'Защита от субсидиарной ответственности и убытков', 'Контроль действий арбитражного управляющего', 'Приобретение активов в процедуре'],
+      link: 'bankruptcy.html', linkText: 'Подробно о практике банкротства →' },
+    { code: '05 · ПАРТНЁРСКИЙ УРОВЕНЬ', title: 'Специальные ситуации',
+      lead: 'Задачи, где нет готового решения и нельзя ошибиться: несколько практик одновременно, высокая цена вопроса, участие государства. Такие проекты ведёт партнёр лично.',
+      when: ['Актив с непростой историей приобретения под угрозой', 'В споре участвует государственный орган или прокуратура', 'Ситуация кризисная и решение нужно за дни, а не месяцы'],
+      includes: ['Защита активов, приобретённых в результате приватизации и банкротств 1990–2000-х', 'Споры с участием государственных органов', 'Кризисное управление правовыми рисками группы', 'Сценарное планирование: что делаем при каждом варианте развития', 'Координация с адвокатами по смежным направлениям'] },
+  ];
+  static FAQS = [
+    { q: 'Сколько стоит абонентское сопровождение?', a: 'Зависит от объёма задач и отрасли. Точную цифру называем после короткого разговора о вашем бизнесе — и она закрепляется в договоре на весь период.' },
+    { q: 'Что будет после того, как я напишу?', a: 'Проверим отсутствие конфликта интересов, зададим уточняющие вопросы и предложим формат работы. Если задача не наша — честно скажем и порекомендуем коллег.' },
+    { q: 'Работаете ли вы за пределами Москвы?', a: 'Да. Судебная и банкротная работа ведётся по всей России, текущее сопровождение — дистанционно: большинству клиентов очный формат не требуется.' },
+    { q: 'Как обеспечивается конфиденциальность?', a: 'Адвокатская тайна и NDA по умолчанию. Мы не публикуем имена клиентов и детали дел — в том числе в кейсах на этом сайте.' },
+  ];
+  componentDidMount() {
+    this._onScroll = () => {
+      if (this._raf) return;
+      this._raf = requestAnimationFrame(() => {
+        this._raf = null;
+        const doc = document.documentElement;
+        const max = doc.scrollHeight - window.innerHeight;
+        const progress = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+        let activeLabel = this.state.activeLabel;
+        const sections = document.querySelectorAll('[data-screen-label]');
+        for (const sec of sections) {
+          const r = sec.getBoundingClientRect();
+          if (r.top <= window.innerHeight * .45 && r.bottom > window.innerHeight * .45) { activeLabel = sec.getAttribute('data-screen-label'); break; }
+        }
+        if (Math.abs(progress - this.state.progress) > .002 || activeLabel !== this.state.activeLabel) this.setState({ progress, activeLabel });
+      });
+    };
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+    this._onScroll();
+  }
+  _openSvc(i) {
+    const next = this.state.openSvc === i ? -1 : i;
+    this.setState({ openSvc: next }, () => {
+      if (next < 0) return;
+      requestAnimationFrame(() => setTimeout(() => {
+        const p = document.getElementById('svc-detail');
+        if (!p) return;
+        const r = p.getBoundingClientRect();
+        if (r.top < 90 || r.bottom > window.innerHeight)
+          window.scrollTo({ top: window.scrollY + r.top - 110, behavior: 'smooth' });
+      }, 60));
+    });
+  }
+  componentWillUnmount() { window.removeEventListener('scroll', this._onScroll); if (this._raf) cancelAnimationFrame(this._raf); }
+  renderVals() {
+    const s = this.state;
+    const maxIndex = 1; // 4 карточки, видно 3
+    const i = Math.min(s.caseIndex, maxIndex);
+    return {
+      trackShift: 'calc(' + (-i) + ' * ((100% - 48px) / 3 + 24px))',
+      atStart: i === 0, atEnd: i >= maxIndex,
+      railFill: (s.progress * 100).toFixed(1) + '%',
+      faqs: Component.FAQS.map((f, idx) => ({
+        ...f, open: s.openFaq === idx, sym: s.openFaq === idx ? '–' : '+',
+        toggle: () => this.setState({ openFaq: s.openFaq === idx ? -1 : idx }),
+      })),
+      svcOpen: s.openSvc >= 0,
+      svc: Component.SVCS[s.openSvc] || Component.SVCS[0],
+      svcWhen: (Component.SVCS[s.openSvc] || Component.SVCS[0]).when.map(t => ({ t })),
+      svcIncludes: (Component.SVCS[s.openSvc] || Component.SVCS[0]).includes.map(t => ({ t })),
+      svcHasLink: !!(Component.SVCS[s.openSvc] || {}).link,
+      svcLink: (Component.SVCS[s.openSvc] || {}).link || '#',
+      svcLinkText: (Component.SVCS[s.openSvc] || {}).linkText || '',
+      svcClose: () => this.setState({ openSvc: -1 }),
+      svcToggle0: () => this._openSvc(0), svcToggle1: () => this._openSvc(1),
+      svcToggle2: () => this._openSvc(2), svcToggle3: () => this._openSvc(3),
+      svcToggle4: () => this._openSvc(4),
+      svcActive0: s.openSvc === 0 ? 'var(--accent)' : 'var(--line)',
+      svcActive1: s.openSvc === 1 ? 'var(--accent)' : 'var(--line)',
+      svcActive2: s.openSvc === 2 ? 'var(--accent)' : 'var(--line)',
+      svcActive3: s.openSvc === 3 ? 'var(--accent)' : 'var(--line)',
+      svcActive4: s.openSvc === 4 ? 'var(--accent)' : 'var(--ink)',
+      activeLabel: s.activeLabel,
+      prevOpacity: i === 0 ? .35 : 1, nextOpacity: i >= maxIndex ? .35 : 1,
+      casesPrev: () => this.setState({ caseIndex: Math.max(0, i - 1) }),
+      casesNext: () => this.setState({ caseIndex: Math.min(maxIndex, i + 1) }),
+      accent: this.props.accentColor ?? '#2f4ee6',
+      apCards: (this.props.approachVariant ?? 'Карточки') === 'Карточки',
+      apList: this.props.approachVariant === 'Список',
+      apManifesto: this.props.approachVariant === 'Манифест',
+      apSplit: this.props.approachVariant === 'Цитата + принципы',
+      name: s.name, company: s.company, contact: s.contact, message: s.message,
+      sent: s.sent, notSent: !s.sent,
+      sentName: s.sentName || 'ваша заявка принята',
+      onName: e => this.setState({ name: e.target.value }),
+      onCompany: e => this.setState({ company: e.target.value }),
+      onContact: e => this.setState({ contact: e.target.value }),
+      onMessage: e => this.setState({ message: e.target.value }),
+      agreed: !!s.agreed,
+      cantSend: !s.agreed,
+      sendOpacity: s.agreed ? 1 : .4,
+      onAgree: e => this.setState({ agreed: e.target.checked }),
+      onSend: () => { if (s.agreed) this.setState({ sent: true, sentName: s.name || 'ваша заявка принята' }); },
+      onReset: () => this.setState({ sent: false, name: '', company: '', contact: '', message: '', agreed: false }),
+    };
+  }
+}
+</script>
+</body>
+</html>
