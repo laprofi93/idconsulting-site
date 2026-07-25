@@ -1,8 +1,4 @@
 User-agent: *
-Disallow: /
+Allow: /
 
-# Индексация закрыта до подключения основного домена.
-# После подключения заменить на:
-# User-agent: *
-# Allow: /
-# Sitemap: https://<домен>/sitemap.xml
+Sitemap: https://idconsulting.legal/sitemap.xml
